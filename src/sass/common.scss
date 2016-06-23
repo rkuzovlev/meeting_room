@@ -1,0 +1,13 @@
+* {
+	font-family: 'Roboto', sans-serif;
+}
+
+div#content {
+	width: 1200px;
+	margin: 0 auto;
+
+	@media (max-width: 1250px){
+		width: calc(100% - 50px);
+		margin: 0 25px;
+	}
+}

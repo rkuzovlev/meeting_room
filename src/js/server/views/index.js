@@ -1,13 +1,14 @@
-export default function render(title, body){
+export default function render(title, body, description){
 	return `<html>
 <head>
 	<meta charSet='utf-8' />
 	<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/assets/main.css" />
 
 	<title>${title}</title>
-	<meta name='description' content="test" />
+	<meta name='description' content="${description}" />
 </head>
 <body>
 	<div id='content'>${body}</div>
