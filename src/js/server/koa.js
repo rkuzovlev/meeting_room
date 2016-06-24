@@ -49,6 +49,9 @@ app.use(mount(grant))
 
 app.use(routes.routes());
 
-app.listen(3000, function() {
-	console.log('app is started');
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
+
+app.listen(port, host, function() {
+	console.log('app is started on ', host + ":" + port);
 });
