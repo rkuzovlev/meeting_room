@@ -12,7 +12,7 @@ export default React.createClass({
 			<section className="room">
 				<div className="media">
 					<div className="player">
-						<h1>Room block {this.props.params.roomID}</h1>
+						<h1>Room block {this.props.params.roomID} !!!!!!!!!!!!!!!!!!!!!!!</h1>
 						<div className="video">
 							<video></video>
 						</div>
