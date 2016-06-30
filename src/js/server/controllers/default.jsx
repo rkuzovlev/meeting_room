@@ -3,35 +3,63 @@ import Iso from 'iso';
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
+import AltContainer from 'alt-container';
 
 import ServerHTML from './../views/index';
 import routes from './../../client/routes.jsx';
+import Alt from './../../client/alt';
+import Fetcher from './../fetcher';
+import Resolver from './../resolver';
+
+
+const runRouter = function(routes, location){
+	return new Promise(function(resolve){
+		match({ routes, location }, function(...args){
+			resolve(args)
+		});
+	});
+}
+
 
 
 export function *index(argument) {
-	match({ routes: routes, location: this.request.url }, (err, redirect, props) => {
-		if (err) {
-			this.throw(500, err.message);
-		
-		} else if (redirect) {
-			this.redirect(redirect.pathname + redirect.search)
-		
-		} else if (!props) {
-			this.throw(404, 'Not Found');
+	const [err, redirect, props] = yield runRouter(routes, this.request.url)
 
-		} else {
-			const iso = new Iso()
+	if (err) {
+		this.throw(500, err.message);
+	
+	} else if (redirect) {
+		this.redirect(redirect.pathname + redirect.search)
+	
+	} else if (!props) {
+		this.throw(404, 'Not Found');
 
-			iso.add(renderToString(<RouterContext {...props}/>), { someSampleData: 'Hello, World! qdw' })
+	} else {
+		const fetcher = new Fetcher(this.app)
+		const flux = new Alt(fetcher, new Resolver())
+		const iso = new Iso()
+		const elems =  (<AltContainer flux={flux}> 
+							<RouterContext {...props}/> 
+						</AltContainer>)
 
-			// const sProps = { body, assets, locale, title, description }
-			// const sProps = { body: iso.render(), assets: {}, locale: "ru", title: "Title", description: "description" }
-			// const html = renderToString(<ServerHTML { ...sProps } />)
 
+		try {
+
+			// TODO: change this behavior
+			renderToString(elems); // we have to send WillMount event to react elements
+			
+			yield flux.resolver.all()
+			
+			const rendered = renderToString(elems); // final render
+			iso.add(rendered, flux.takeSnapshot())
 			const html = ServerHTML("Title", iso.render(), 'description');
-
+						
 			this.status = 200;
-			this.body = `<!DOCTYPE html>${html}`
+			this.body = `<!DOCTYPE html>${html}`;
+		} catch (e) {
+			console.error('Was somethig wrong with flux.resolver promises. ', e.message);
+			this.throw(500, 'Sorry, service unavailable now, try it later!');
+			return;
 		}
-	})
+	}
 }

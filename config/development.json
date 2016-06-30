@@ -1,0 +1,27 @@
+{
+	"server": {
+		"host": "localhost",
+		"port": 3000
+	},
+	"keys": [ "qp0GBwcn9VHdIQbVlF4MS2Tn" ],
+	"redis": {
+		"host": "127.0.0.1",
+		"port": 6370,
+		"db": 5
+	}, 
+	"passport": {
+		"server": {
+			"host": "http://mroomdev.rkuzovlev.com"
+		},
+		"facebook": {
+			"clientID": "1114039515301285",
+			"clientSecret": "17af8cdc9e024a7afc668d7faab3996a",
+			"callbackURL": "/login/facebook/callback",
+			"loginURL": "/login/facebook",
+			"scope": [
+				"user_groups",
+				"user_likes"
+			]
+		}
+	}
+}

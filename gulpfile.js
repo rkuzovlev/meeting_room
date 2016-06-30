@@ -12,12 +12,15 @@ const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const gzip = require('gulp-gzip');
 
-
 const assetsFolder = './dist/assets';
 
 function compile(watch, prod) {
-	
-	var bundler, bf = browserify('src/js/client/app.jsx', { debug: true });
+	var browserifyConf = {}
+	if (!prod){
+		browserifyConf.debug = true
+	}
+
+	var bundler, bf = browserify('src/js/client/app.jsx', browserifyConf);
 	// ['react', 'react-dom', 'react-router'].forEach(m => bf.ignore(m));
 
 
@@ -46,8 +49,8 @@ function compile(watch, prod) {
 			}
 
 			p.pipe(gulp.dest(assetsFolder))
-			.pipe(gzip())
-			.pipe(gulp.dest(assetsFolder));
+			 .pipe(gzip())
+			 .pipe(gulp.dest(assetsFolder));
 	}
 
 

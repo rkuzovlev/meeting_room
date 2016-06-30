@@ -1,7 +1,8 @@
 {
 	"env": { 
 		"es6": true, 
-		"commonjs": true 
+		"commonjs": true,
+        "babel-eslint": true
 	},
 	"parserOptions": {
         "ecmaVersion": 6,
