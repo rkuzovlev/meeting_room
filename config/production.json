@@ -6,7 +6,7 @@
 	"keys": [ "qp0GBwcn9VHdIQbVlF4MS2Tn" ],
 	"redis": {
 		"host": "127.0.0.1",
-		"port": 6370,
+		"port": 6379,
 		"db": 5
 	},
 	"passport": {
