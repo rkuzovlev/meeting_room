@@ -67,6 +67,7 @@ gulp.task('js:watch', function (cb) {
 
 
 
+
 gulp.task('sass', () => {
 	return gulp.src('src/sass/main.scss')
 		.pipe(sass().on('error', sass.logError))
@@ -82,5 +83,20 @@ gulp.task('sass:watch', function () {
     });
 });
 
-gulp.task('build', ['js', 'sass'])
-gulp.task('default', ['sass', 'sass:watch', 'js:watch'])
+
+
+
+gulp.task('assets', () => {
+	return gulp.src('./src/assets/**/*')
+		.pipe(gulp.dest('./dist/assets'));
+});
+
+gulp.task('assets:watch', function () {
+	// gulp.watch('src/sass/**/*.scss', ['sass']);
+	watch('src/assets/**/*.*', (events, done) => {
+        gulp.start('assets');
+    });
+});
+
+gulp.task('build', ['js', 'sass', 'assets'])
+gulp.task('default', ['sass', 'assets', 'sass:watch', 'js:watch', 'assets:watch'])
