@@ -13,7 +13,7 @@ import Alt from './alt';
 
 
 Iso.bootstrap(function (state) {
-	console.log('Iso.bootstrap', JSON.parse(state));
+	// console.log('Iso.bootstrap', JSON.parse(state));
 	
 	const alt = new Alt(new Fetcher(), new Resolver());
 	alt.bootstrap(state)

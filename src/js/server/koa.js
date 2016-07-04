@@ -13,6 +13,8 @@ import routes from './routes'
 import apiRoutes from './apiRoutes'
 import { getDistFolder, getServerListenParams } from './utils'
 
+import './mysql'
+
 
 var app = koa();
 

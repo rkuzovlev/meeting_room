@@ -1,4 +1,29 @@
 {
+	"centrifugo": {
+		"clienturl": "http://centrifugo_mroomdev.rkuzovlev.com:8000/connection",
+		"url": "http://localhost:8000",
+		"secret": "4e02110a-f4b7-43f3-a43e-a2cc8d640368"
+	},
+	"database": {
+		"db": "mroom",
+		"user": "mroom",
+		"pass": "mroom",
+		"options": {
+			"host": "localhost",
+			"dialect": "mysql",
+
+			"pool": {
+				"max": 5,
+				"min": 0,
+				"idle": 2000
+			},
+			"define": {
+				"underscored": true,
+				"paranoid": true,
+				"freezeTableName": true
+			}
+		}
+	},
 	"server": {
 		"host": "localhost",
 		"port": 3000

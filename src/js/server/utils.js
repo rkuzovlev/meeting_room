@@ -16,3 +16,9 @@ const port = process.env.PORT || serverConf.port;
 export function getServerListenParams(){
 	return { host: host, port: port }
 }
+
+
+
+export function getCurrentTimestamp(){
+	return Math.round(new Date().getTime() / 1000)
+}
