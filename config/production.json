@@ -44,8 +44,14 @@
 			"callbackURL": "/login/facebook/callback",
 			"loginURL": "/login/facebook",
 			"scope": [
-				"user_groups",
-				"user_likes"
+				"email", 
+				"public_profile"
+			],
+			"profileFields": [
+				"id", 
+				"first_name", 
+				"last_name", 
+				"email"
 			]
 		}
 	}

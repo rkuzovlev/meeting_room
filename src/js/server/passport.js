@@ -3,6 +3,12 @@ import { Strategy as FBStrategy } from 'passport-facebook'
 import koaRouter from 'koa-router'
 
 import config from 'config'
+import sequelize from './sequelize'
+
+
+const User   = sequelize.models.user;
+const Social = sequelize.models.social;
+const Room   = sequelize.models.room;
 
 
 const passportconf = config.get('passport')
@@ -11,20 +17,39 @@ const fbconf = passportconf.facebook
 const fbStrategyConf = {
 	"clientID": fbconf.clientID,
 	"clientSecret": fbconf.clientSecret,
-	"callbackURL": passportconf.server.host + fbconf.callbackURL
+	"callbackURL": passportconf.server.host + fbconf.callbackURL,
+	"profileFields": fbconf.profileFields
 }
 
-passport.use(new FBStrategy(fbStrategyConf, function(accessToken, refreshToken, profile, cb) {
-	// In this example, the user's Facebook profile is supplied as the user
-	// record.  In a production-quality application, the Facebook profile should
-	// be associated with a user record in the application's database, which
-	// allows for account linking and authentication with other identity
-	// providers.
-	
-	// console.log("FBStrategy calllback", accessToken, refreshToken, profile, cb)
-	console.log("FBStrategy calllback", this)
 
-	return cb(null, profile);
+let loginOrCreate = function (socialType, socialID, name, email, socialData){
+	return Social.loginOrCreateUser(socialType, socialID, name, email, socialData);
+}
+
+
+
+/*
+profile._json = { id: '***************',
+				  first_name: 'ivan',
+				  last_name: 'ivanov',
+				  email: 'email@example.com' }
+*/
+passport.use(new FBStrategy(fbStrategyConf, function(accessToken, refreshToken, profile, cb) {
+	let u = profile._json
+	let name = u.first_name + " " + u.last_name;
+	
+	loginOrCreate('facebook', u.id, name, u.email, u).then(function(user){
+		if (!user){
+			throw new Error("Can't login with facebook");
+		}
+
+		console.log('logged', user.get({ plain: true }))
+
+		cb(null, user.get({ plain: true }));
+	}).catch(function(error){
+		console.error("Can't login by facebook");
+		cb(error, null);
+	});
 }));
 
 
@@ -41,28 +66,29 @@ passport.deserializeUser(function(obj, cb) {
 
 var router = koaRouter()
 
-router.get(fbconf.loginURL, passport.authenticate('facebook'))
-router.get(fbconf.callbackURL, function*(next) {
-	var ctx = this
+router.get(fbconf.loginURL, passport.authenticate('facebook', { scope: fbconf.scope }))
+router.get(fbconf.callbackURL, passport.authenticate('facebook', { successRedirect: '/', failureRedirect: "/login/error/Can't login by facebook" }));
 
-	yield* passport.authenticate('facebook', function*(err, user, info) {
-		if (err) {
-			console.log('error', err)
-			ctx.status = 301
-			ctx.redirect("/login/error/Can't login by facebook")
-			return
-		}
+// router.get(fbconf.callbackURL, function*(next) {
+// 	var ctx = this
 
-		if (user === false) {
-			ctx.status = 301
-			ctx.redirect("/login/error/Can't login by facebook")
-		} else {
-			ctx.status = 301
-			ctx.redirect('/')
-		}
-	}).call(this, next)
+// 	yield* passport.authenticate('facebook', function*(err, user, info) {
+// 		ctx.status = 301
 
-})
+// 		if (err) {
+// 			console.log('error', err)
+// 			ctx.redirect("/login/error/Can't login by facebook")
+		
+// 		} else if (user === false) {
+// 			ctx.redirect("/login/error/Can't login by facebook")
+		
+// 		} else {
+// 			ctx.redirect('/')
+		
+// 		}
+// 	}).call(this, next)
+
+// })
 
 
 export { passport, router }

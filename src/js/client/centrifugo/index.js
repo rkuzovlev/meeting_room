@@ -11,15 +11,14 @@ function getCentrifugo(){
 		});
 	}
 
-	return fetch('/api/centrifugo/create_token')
+	return fetch('/api/centrifugo/create_token', { credentials: 'same-origin' })
 		.then(function(response){
-			// console.log('response', response)
+			console.log('response', response)
 			return response.json()
 		})
 		.then(function(json){
 			var c = new Centrifuge({
 				url: json.url,
-				// url: 'http://12d.rkuzovlev.com/connection',
 				user: json.user,
 				timestamp: json.timestamp,
 				token: json.token,

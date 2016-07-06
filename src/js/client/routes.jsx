@@ -3,9 +3,9 @@ import { Route, IndexRoute } from 'react-router'
 import App from './components/App.jsx'
 import About from './components/About.jsx'
 import Home from './components/Home.jsx'
-import Room from './components/Room.jsx'
+import Room from './components/room/Room.jsx'
 import Login from './components/Login.jsx'
-import Profile from './components/Profile.jsx'
+import Profile from './components/profile/Profile.jsx'
 
 
 export default <Route path="/" component={App}>

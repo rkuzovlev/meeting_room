@@ -13,13 +13,11 @@ import routes from './routes'
 import apiRoutes from './apiRoutes'
 import { getDistFolder, getServerListenParams } from './utils'
 
-import './mysql'
-
 
 var app = koa();
 
-app.use(kcg())
-app.use(etag())
+// app.use(kcg())
+// app.use(etag())
 
 app.keys = config.get("keys")
 

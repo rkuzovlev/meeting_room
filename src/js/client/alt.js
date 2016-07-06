@@ -1,10 +1,10 @@
 import Alt from 'alt'
 
-import UserActions from './actions/UserActions'
+import CurrentUserActions from './actions/CurrentUserActions'
 
-import UserStore from './stores/UserStore'
+import CurrentUserStore from './stores/CurrentUserStore'
 
-import UserSource from './sources/UserSource'
+import CurrentUserSource from './sources/CurrentUserSource'
 
 class Flux extends Alt {
 	constructor(fetcher, resolver) {
@@ -13,12 +13,12 @@ class Flux extends Alt {
 		this.resolver = resolver
 
 		this.sources = {
-			"UserSource": new UserSource(fetcher)
+			"CurrentUserSource": new CurrentUserSource(fetcher)
 		}
 
-		this.addActions("UserActions", UserActions);
+		this.addActions("CurrentUserActions", CurrentUserActions);
 
-		this.addStore("UserStore", UserStore);
+		this.addStore("CurrentUserStore", CurrentUserStore);
 	}
 }
 

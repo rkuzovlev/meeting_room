@@ -4,8 +4,8 @@ import url from "url"
 import { getServerListenParams } from './utils'
 
 class Fetcher {
-	constructor(app){
-		this._app = app
+	constructor(request){
+		this._request = request
 	}
 
 	fetch (fetch_url){
@@ -21,7 +21,11 @@ class Fetcher {
 			result_url = "http://" + u.hostname + ":" + u.port + u.path
 		}
 
-		return fetch(result_url);
+		let opts = {
+			headers: { cookie: this._request.headers.cookie }
+		};
+
+		return fetch(result_url, opts);
 	}
 }
 

@@ -35,7 +35,7 @@ export function *index(argument) {
 		this.throw(404, 'Not Found');
 
 	} else {
-		const fetcher = new Fetcher(this.app)
+		const fetcher = new Fetcher(this.request)
 		const flux = new Alt(fetcher, new Resolver())
 		const iso = new Iso()
 		const elems =  (<AltContainer flux={flux}> 
@@ -44,7 +44,6 @@ export function *index(argument) {
 
 
 		try {
-
 			// TODO: change this behavior
 			renderToString(elems); // we have to send WillMount event to react elements
 			

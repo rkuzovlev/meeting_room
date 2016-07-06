@@ -8,6 +8,9 @@ var router = koaRouter({
 })
 
 router.get('/user/:id', uc.getUser);
+router.get('/user/current', uc.getCurrentUser);
+
+
 router.get('/centrifugo/create_token', cc.createToken);
 
 export default router

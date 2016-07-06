@@ -5,24 +5,24 @@ import FlatButton from 'material-ui/FlatButton';
 
 export default React.createClass({
 	getInitialState() {
-		return this.props.flux.getStore('UserStore').getState();
+		return this.props.flux.getStore('CurrentUserStore').getState();
 	},
 
 	componentDidMount() {
-		this.props.flux.getStore('UserStore').listen(this.onChange);
+		this.props.flux.getStore('CurrentUserStore').listen(this.onChange);
 	},
 
 	componentWillMount() {
-		let state = this.props.flux.getStore('UserStore').getState();
+		let state = this.props.flux.getStore('CurrentUserStore').getState();
 		this.setState(state);
 		
 		if (!state.fetched){
-			this.props.flux.getActions('UserActions').fetchUser(12);
+			this.props.flux.getActions('CurrentUserActions').fetchCurrentUser();
 		}
 	},
 
 	componentWillUnmount() {
-		this.props.flux.getStore('UserStore').unlisten(this.onChange);
+		this.props.flux.getStore('CurrentUserStore').unlisten(this.onChange);
 	},
 
 	onChange(state) {
@@ -38,16 +38,14 @@ export default React.createClass({
 			if (this.state.user.id){
 				return (
 					<ul>
-						<li><Link tabIndex="-1" to="/"><FlatButton label="Home" /></Link></li>
 						<li><Link tabIndex="-1" to="/about"><FlatButton label="About" /></Link></li>
-						<li><Link tabIndex="-1" to="/profile"><FlatButton secondary={true} label={this.state.user.username} /></Link></li>
+						<li><Link tabIndex="-1" to="/profile"><FlatButton secondary={true} label={this.state.user.name} /></Link></li>
 						<li><FlatButton label="Logout" onClick={this.logout} /></li>
 					</ul>
 				)
 			} else {
 				return (
 					<ul>
-						<li><Link tabIndex="-1" to="/"><FlatButton label="Home" /></Link></li>
 						<li><Link tabIndex="-1" to="/about"><FlatButton label="About" /></Link></li>
 						<li><Link tabIndex="-1" to="/login"><FlatButton secondary={true} label="Login/Sign up" /></Link></li>
 					</ul>

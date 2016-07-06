@@ -1,18 +1,18 @@
-class UserStore {
+class CurrentUserStore {
 	constructor() {
 		this.user = {
 			"id": null,
-			"username": ""
+			"name": ""
 		};
 		this.errorMessage = null;
 
 		this.fetched = false; // false if data is not fetched yet
 
-		this.bindActions(this.alt.getActions('UserActions'))
+		this.bindActions(this.alt.getActions('CurrentUserActions'))
 	}
 
-	onUpdateUsername(username) {
-		this.user.username = username;
+	onUpdateUsername(name) {
+		this.user.name = name;
 	}
 
 	onUpdateUser(user) {
@@ -26,4 +26,4 @@ class UserStore {
 	}
 }
 
-export default UserStore
+export default CurrentUserStore

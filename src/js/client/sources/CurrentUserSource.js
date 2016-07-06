@@ -8,7 +8,7 @@ if (!isNode){
 }
 
 
-class UserSource {
+class CurrentUserSource {
 	constructor (fetcher) {
 		this._fetcher = fetcher
 	}
@@ -19,6 +19,13 @@ class UserSource {
 				return response.json()
 			})
 	}
+
+	fetchCurrent(){
+		return this._fetcher.fetch('/api/user/current')
+			.then(function(response) {
+				return response.json()
+			})
+	}
 };
 
-export default UserSource
+export default CurrentUserSource

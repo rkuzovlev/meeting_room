@@ -1,4 +1,4 @@
-class UserActions {
+class CurrentUserActions {
 	constructor() {
 		this.generateActions (
 			'updateUsername',
@@ -7,11 +7,11 @@ class UserActions {
 		)
 	}
 
-	fetchUser(userId) {
+	fetchCurrentUser() {
 		return (dispatch, alt) => {
 			dispatch();
 
-			let promise = alt.sources.UserSource.fetch(userId)
+			let promise = alt.sources.CurrentUserSource.fetchCurrent()
 				.then((user) => {
 					this.updateUser(user);
 				})
@@ -24,4 +24,4 @@ class UserActions {
 	}
 }
 
-export default UserActions
+export default CurrentUserActions

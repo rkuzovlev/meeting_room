@@ -5,28 +5,25 @@ import Social from "./social"
 import Room from "./room"
 
 var User = sequelize.define('user', {
-	nickname: {
+	name: {
 		type: Sequelize.STRING,
-		unique: true,
-		allowNull: false,
-		validate: {
-			notNull: true,
-			is: /^[a-zA-Z0-9\_\-]+$/i
-		}
+		allowNull: false
 	},
 	email: {
 		type: Sequelize.STRING,
 		unique: true,
-		allowNull: false,
-		validate: {
-			isEmail: true
-		}
+		allowNull: true
+	}
+}, {
+	classMethods: {
+		
 	}
 });
 
 
 User.hasMany(Social, { as: 'Socials' })
+Social.belongsTo(User)
 User.hasMany(Room, { as: 'Rooms' })
-
+Room.belongsTo(User)
 
 export default User
