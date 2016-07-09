@@ -1,0 +1,55 @@
+section.profile {
+	div.profile {
+		@media (max-width: 600px){
+			text-align: center;
+		}
+
+		div.info {
+		    display: inline-block;
+		    vertical-align: top;
+		    margin-left: 40px;
+
+    	    @media (max-width: 600px){
+				margin-left: 0;
+		    	display: block;
+			}
+
+		    div.name {
+	    	    font-size: 24px;
+	    	    margin: 24px 0;
+	    	    height: 40px;
+		    }
+		}
+	}
+
+	div.rooms {
+
+		p.title {
+			font-size: 24px;
+			margin: 30px 0 0 0;
+		}
+
+		div.list {
+			margin-left: -15px;
+			margin-right: -15px;
+
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		    align-items: flex-start;
+
+			> * {
+				width: calc(33% - 30px);
+				margin: 15px;
+
+				@media (max-width: 900px){
+					width: calc(50% - 30px);
+				}
+
+				@media (max-width: 600px){
+					width: 100%;
+				}
+			}
+		}
+	}
+}

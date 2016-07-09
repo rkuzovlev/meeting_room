@@ -3,6 +3,7 @@ export default function render(title, body, description){
 <head>
 	<meta charSet='utf-8' />
 	<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width" />
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/assets/main.css" />

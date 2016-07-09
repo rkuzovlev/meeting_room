@@ -8,7 +8,10 @@ var router = koaRouter({
 })
 
 router.get('/user/:id', uc.getUser);
+
 router.get('/user/current', uc.getCurrentUser);
+router.put('/user/current', uc.putCurrentUser);
+router.get('/user/current/rooms', uc.getCurrentUserRooms);
 
 
 router.get('/centrifugo/create_token', cc.createToken);

@@ -4,7 +4,7 @@
 
 div#content {
 	width: 1200px;
-	margin: 0 auto;
+	margin: 0 auto 40px auto;
 
 	@media (max-width: 1250px){
 		width: calc(100% - 50px);

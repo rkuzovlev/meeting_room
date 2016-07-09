@@ -1,8 +1,10 @@
 import Alt from 'alt'
 
 import CurrentUserActions from './actions/CurrentUserActions'
+import NotificationActions from './actions/NotificationActions'
 
 import CurrentUserStore from './stores/CurrentUserStore'
+import NotificationStore from './stores/NotificationStore'
 
 import CurrentUserSource from './sources/CurrentUserSource'
 
@@ -17,8 +19,10 @@ class Flux extends Alt {
 		}
 
 		this.addActions("CurrentUserActions", CurrentUserActions);
+		this.addActions("NotificationActions", NotificationActions);
 
 		this.addStore("CurrentUserStore", CurrentUserStore);
+		this.addStore("NotificationStore", NotificationStore);
 	}
 }
 

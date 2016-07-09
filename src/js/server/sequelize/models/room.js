@@ -4,10 +4,15 @@ import Sequelize from "sequelize";
 var Room = sequelize.define('room', {
 	title: {
 		type: Sequelize.STRING,
-		allowNull: false,
-		validate: {
-			notNull: true
-		}
+		allowNull: false
+	},
+	image: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	description: {
+		type: Sequelize.TEXT,
+		allowNull: true
 	}
 });
 

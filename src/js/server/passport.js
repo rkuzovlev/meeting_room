@@ -43,22 +43,24 @@ passport.use(new FBStrategy(fbStrategyConf, function(accessToken, refreshToken, 
 			throw new Error("Can't login with facebook");
 		}
 
-		console.log('logged', user.get({ plain: true }))
-
 		cb(null, user.get({ plain: true }));
 	}).catch(function(error){
-		console.error("Can't login by facebook");
+		console.error(error);
 		cb(error, null);
 	});
 }));
 
 
 passport.serializeUser(function(user, cb) {
-	cb(null, user);
+	cb(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb) {
-	cb(null, obj);
+passport.deserializeUser(function(id, cb) {
+	User.findOne({ where: {id: id} }).then(function(user) {
+		cb(null, user);
+	}).catch(function(error){
+		cb(error, null);
+	});
 });
 
 

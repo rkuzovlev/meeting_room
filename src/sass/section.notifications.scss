@@ -1,0 +1,32 @@
+section.notifications {
+	position: fixed;
+    z-index: 100;
+    width: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+
+	.row {
+		text-align: center;
+
+	    .notification {
+	    	padding: 10px;
+	    	margin: 3px auto;
+	    	display: inline-block;
+    		border-radius: 3px;
+    		pointer-events: auto;
+
+	    	&.error {
+	    		background-color: #e53935;
+	    	}
+
+	    	&.warning {
+	    		background-color: #fdd835;
+	    	}
+
+	    	&.success {
+	    		background-color: #43a047;
+	    	}
+	    }
+	}
+}

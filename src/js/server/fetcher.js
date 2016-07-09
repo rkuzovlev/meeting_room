@@ -8,7 +8,7 @@ class Fetcher {
 		this._request = request
 	}
 
-	fetch (fetch_url){
+	fetch (fetch_url, opts = {}){
 
 		let u = url.parse(fetch_url);
 
@@ -21,9 +21,8 @@ class Fetcher {
 			result_url = "http://" + u.hostname + ":" + u.port + u.path
 		}
 
-		let opts = {
-			headers: { cookie: this._request.headers.cookie }
-		};
+		opts.headers = opts.headers || {}
+		opts.headers.cookie = this._request.headers.cookie;
 
 		return fetch(result_url, opts);
 	}

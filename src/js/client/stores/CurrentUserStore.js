@@ -5,14 +5,29 @@ class CurrentUserStore {
 			"name": ""
 		};
 		this.errorMessage = null;
+		this.edit = false;
+
+		this.rooms = [];
 
 		this.fetched = false; // false if data is not fetched yet
 
 		this.bindActions(this.alt.getActions('CurrentUserActions'))
 	}
 
+	onUpdateRooms(rooms) {
+		this.rooms = rooms;
+	}
+
 	onUpdateUsername(name) {
 		this.user.name = name;
+	}
+
+	onUserEdit() {
+		this.edit = true;
+	}
+
+	onUserSave() {
+		this.edit = false;
 	}
 
 	onUpdateUser(user) {

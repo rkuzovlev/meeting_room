@@ -26,6 +26,27 @@ class CurrentUserSource {
 				return response.json()
 			})
 	}
+
+	fetchRooms(){
+		return this._fetcher.fetch('/api/user/current/rooms')
+			.then(function(response) {
+				return response.json()
+			})
+	}
+
+	saveUser(user){
+		let opts = {
+			method: 'PUT',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'same-origin',
+			body: JSON.stringify(user)
+		};
+
+		return this._fetcher.fetch('/api/user/current', opts)
+	}
 };
 
 export default CurrentUserSource
