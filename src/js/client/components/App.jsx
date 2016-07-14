@@ -12,19 +12,12 @@ export default React.createClass({
 	render() {
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme({}, {userAgent: 'all'})}>
-				<div>
-					<AltContainer>
-						<Notifications {...this.props} />
-					</AltContainer>
+				<AltContainer>
+					<Notifications {...this.props} />
+					<Header {...this.props} />
 
-					<AltContainer>
-						<Header {...this.props} />
-					</AltContainer>
-					
-					<AltContainer>
-						{this.props.children}	
-					</AltContainer>
-				</div>
+					{this.props.children}
+				</AltContainer>
 			</MuiThemeProvider>
 		)
 	}

@@ -26,7 +26,15 @@ function getCentrifugo(){
 			});
 
 			c.subscribe("main", function(message) {
-				console.log(message);
+				console.log("main", message.data);
+			});
+
+			c.subscribe("user#1", function(message) {
+				console.log("user#1", message.data);
+			});
+
+			c.subscribe("room:1", function(message) {
+				console.log("room:1", message.data);
 			});
 
 			c.connect();

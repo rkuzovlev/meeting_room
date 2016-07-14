@@ -52,6 +52,11 @@ export default React.createClass({
 		browserHistory.push('/room/' + roomid + '/edit')
 	},
 
+	goToRoom(event) {
+		let roomid = event.currentTarget.dataset.roomid
+		browserHistory.push('/room/' + roomid)
+	},
+
 	render() {
 		let editButton = (uid, roomid) => {
 			if (this.state.user.id == uid){
@@ -80,7 +85,12 @@ export default React.createClass({
 							<CardText style={cardTextStyle}>{r.description}</CardText>
 
 							<CardActions style={cardActionsStyle}>
-								<FlatButton secondary={true} label="Enter room" />
+								<FlatButton 
+									data-roomid={r.id}
+									onClick={this.goToRoom} 
+									secondary={true} 
+									label="Enter room" 
+								/>
 								{editButton(r.uid, r.id)}
 							</CardActions>
 						</Card>

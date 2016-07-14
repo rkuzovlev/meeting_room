@@ -70,7 +70,7 @@ export default React.createClass({
 		return (
 			<section className="profile">
 				<div className="profile">
-					<Avatar src="//graph.facebook.com/v2.6/10206464428678219/picture?type=large" size={150} />
+					<Avatar src={this.state.user.avatar} size={150} />
 					{infoBlock}
 				</div>
 

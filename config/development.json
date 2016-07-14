@@ -2,7 +2,12 @@
 	"centrifugo": {
 		"clienturl": "http://centrifugo_mroomdev.rkuzovlev.com:8000/connection",
 		"url": "http://localhost:8000",
-		"secret": "4e02110a-f4b7-43f3-a43e-a2cc8d640368"
+		"secret": "4e02110a-f4b7-43f3-a43e-a2cc8d640368",
+		"redis": {
+			"host": "127.0.0.1",
+			"port": 6370,
+			"db": 6
+		}
 	},
 	"database": {
 		"db": "mroom",

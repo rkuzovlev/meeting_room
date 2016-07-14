@@ -15,6 +15,7 @@ export default <Route path="/" component={App}>
 	<Route path="/profile" component={Profile}/>
 	<Route path="/login" component={Login}/>
 	<Route path="/login/error/:message" component={Login}/>
+	<Route path="/room/add" name="addRoom" component={RoomAddEdit}/>
 	<Route path="/room/:roomID" component={Room}/>
-	<Route path="/room/:roomID/edit" component={RoomAddEdit}/>
+	<Route path="/room/:roomID/edit" name="roomEdit" component={RoomAddEdit}/>
 </Route>
