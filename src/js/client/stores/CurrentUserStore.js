@@ -1,25 +1,23 @@
 class CurrentUserStore {
 	constructor() {
-		this.user = {
-			"id": null,
-			"name": ""
-		};
-		this.errorMessage = null;
-		this.edit = false;
-
-		this.rooms = [];
-
-		this.fetched = false; // false if data is not fetched yet
+		this.init();
 
 		this.bindActions(this.alt.getActions('CurrentUserActions'))
 	}
 
-	onUpdateRooms(rooms) {
-		this.rooms = rooms;
+	init() {
+		this.user = null;
+
+		this.error = null;
+		this.edit = false;
+
+		this.rooms = [];
 	}
 
 	onUpdateUsername(name) {
-		this.user.name = name;
+		if (this.user){
+			this.user.name = name;
+		}
 	}
 
 	onUserEdit() {
@@ -32,12 +30,15 @@ class CurrentUserStore {
 
 	onUpdateUser(user) {
 		this.user = user;
-		this.fetched = true;
 	}
 
-	onUserFailed(errorMessage) {
-		this.errorMessage = errorMessage;
-		this.fetched = true;
+	onUserFailed(error) {
+		this.error = error;
+		this.user = null;
+	}
+
+	onClearUser() {
+		this.init();
 	}
 }
 

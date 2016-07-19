@@ -1,6 +1,8 @@
 import sequelize from './../sequelize'
 import Sequelize from "sequelize";
 
+import * as utils from "../utils"
+
 var Social = sequelize.define('social', {
 	type: {
 		type: Sequelize.ENUM('facebook', 'google', 'vk', 'twitter'),
@@ -40,6 +42,10 @@ var Social = sequelize.define('social', {
 		}
 	}
 }, {
+	instanceMethods: {
+		toJSON: utils.toJSON
+	},
+	
 	classMethods: {
 		loginOrCreateUser: function(socialType, socialID, name, email, socialData){
 			const where = { 

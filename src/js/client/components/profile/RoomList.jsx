@@ -22,31 +22,6 @@ const cardTextStyle = {
 }
 
 export default React.createClass({
-	getInitialState() {
-		return this.props.flux.getStore('CurrentUserStore').getState();
-	},
-
-	componentDidMount() {
-		this.props.flux.getStore('CurrentUserStore').listen(this.onChange);
-	},
-
-	componentWillMount() {
-		let state = this.props.flux.getStore('CurrentUserStore').getState();
-		this.setState(state);
-		
-		if (!state.fetched){
-			this.props.flux.getActions('CurrentUserActions').fetchRooms();
-		}
-	},
-
-	componentWillUnmount() {
-		this.props.flux.getStore('CurrentUserStore').unlisten(this.onChange);
-	},
-
-	onChange(state) {
-		this.setState(state);
-	},
-
 	editRoom(event) {
 		let roomid = event.currentTarget.dataset.roomid
 		browserHistory.push('/room/' + roomid + '/edit')
@@ -59,7 +34,7 @@ export default React.createClass({
 
 	render() {
 		let editButton = (uid, roomid) => {
-			if (this.state.user.id == uid){
+			if (this.props.CurrentUserStore.user.id == uid){
 				return <FlatButton data-roomid={roomid} onClick={this.editRoom} label="Edit" />
 			} else {
 				return null;
@@ -70,8 +45,7 @@ export default React.createClass({
 			<div className="rooms">
 				<p className="title">User rooms</p>
 				<div className="list">
-
-					{this.state.rooms.map((r) => {
+					{this.props.CurrentUserRoomsStore.rooms.map((r) => {
 						return <Card key={r.id} style={cardStyle}>
 							<CardHeader
 								title={r.uname}
@@ -95,8 +69,6 @@ export default React.createClass({
 							</CardActions>
 						</Card>
 					})}
-
-
 				</div>
 			</div>
 		)

@@ -7,7 +7,6 @@ import "./models";
 
 // sequelize.sync({force: true}).then(function(){
 sequelize.sync().then(function(){
-	console.log('synced');
 }).catch(function(err){
 	console.log('some error occured while sync', err);
 })

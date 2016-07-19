@@ -12,8 +12,6 @@ let send = function(method, channel, data){
 			}
 		]
 	}
-
-	console.log('credis.rpush("centrifugo.api"', JSON.stringify(reids_data));
 	
 	return new Promise(function(resolve, reject){
 		credis.rpush("centrifugo.api", JSON.stringify(reids_data), function(err){

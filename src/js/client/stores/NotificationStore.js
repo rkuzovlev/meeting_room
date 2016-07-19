@@ -18,11 +18,11 @@ class NotificationStore {
 		this.bindActions(this.alt.getActions('NotificationActions'))
 	}
 
-	onAddError(errorMessage) {
+	onAddError(error) {
 		let n = {
 			id: genId(),
 			type: NotificationTypes.ERROR,
-			message: errorMessage
+			error: error
 		}
 		this.notifications.push(n)
 	}

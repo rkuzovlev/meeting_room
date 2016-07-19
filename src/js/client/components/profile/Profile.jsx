@@ -4,47 +4,22 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import AltContainer from 'alt-container';
 
-import RoomList from './RoomList.jsx';
+import RoomListContainer from './RoomListContainer.jsx';
 
 export default React.createClass({
-	getInitialState() {
-		return this.props.flux.getStore('CurrentUserStore').getState();
-	},
-
-	componentDidMount() {
-		this.props.flux.getStore('CurrentUserStore').listen(this.onChange);
-	},
-
-	componentWillMount() {
-		let state = this.props.flux.getStore('CurrentUserStore').getState();
-		this.setState(state);
-		
-		if (!state.fetched){
-			this.props.flux.getActions('CurrentUserActions').fetchCurrentUser();
-		}
-	},
-
-	componentWillUnmount() {
-		this.props.flux.getStore('CurrentUserStore').unlisten(this.onChange);
-	},
-
-	onChange(state) {
-		this.setState(state);
-	},
-
 	editUser() {
-		this.props.flux.getActions('CurrentUserActions').edit()
+		this.props.CurrentUserActions.edit()
 	},
 
 	saveUser() {
-		let user = this.props.flux.getStore('CurrentUserStore').getState().user;
-		this.props.flux.getActions('CurrentUserActions').save(user);
+		let user = this.props.CurrentUserStore.user;
+		this.props.CurrentUserActions.save(user);
 	},
 
 	onChangeName(event) {
-		let state = this.props.flux.getStore('CurrentUserStore').getState();
-		state.user.name = event.target.value
-		this.setState(state);
+		// let state = this.props.CurrentUserStore;
+		// state.user.name = event.target.value
+		// this.setState(state);
 	},
 
 	onNameKeyDown(event) {
@@ -54,30 +29,54 @@ export default React.createClass({
 	},
 
 	render() {
+		let user = this.props.CurrentUserStore.user;
+
+		if (this.props.CurrentUserStore.error){
+			return (
+				<section className="profile">
+					<div className="error">
+						{this.props.CurrentUserStore.error.message}
+					</div>
+				</section>
+			)
+		}
+	
+		if (!user){
+			return (
+				<section className="profile">
+					Loading
+				</section>
+			)
+		}
+
 		let infoBlock = null;
-		if (this.state.edit){
+
+		if (this.props.CurrentUserStore.edit){
 			infoBlock = <div className="info">
-				<div className="name"><TextField ref="nameInput" hintText="Username" onKeyDown={this.onNameKeyDown} onChange={this.onChangeName} value={this.state.user.name} /></div>
+				<div className="name"><TextField ref="nameInput" hintText="Username" onKeyDown={this.onNameKeyDown} onChange={this.onChangeName} value={user.name} /></div>
 				<RaisedButton label="Save" onClick={this.saveUser} />
 			</div>
 		} else {
 			infoBlock = <div className="info">
-				<div className="name">{this.state.user.name}</div>
+				<div className="name">{user.name}</div>
 				<RaisedButton label="Edit" onClick={this.editUser} />
 			</div>
 		}
 
+
 		return (
 			<section className="profile">
 				<div className="profile">
-					<Avatar src={this.state.user.avatar} size={150} />
+					<Avatar src={user.avatar} size={150} />
 					{infoBlock}
 				</div>
 
 				<AltContainer>
-					<RoomList />
+					<RoomListContainer />
 				</AltContainer>
 			</section>
 		)
 	}
 })
+
+

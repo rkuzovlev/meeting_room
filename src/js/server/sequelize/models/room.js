@@ -1,6 +1,8 @@
 import sequelize from './../sequelize'
 import Sequelize from "sequelize";
 
+import * as utils from "../utils"
+
 var Room = sequelize.define('room', {
 	title: {
 		type: Sequelize.STRING,
@@ -13,6 +15,10 @@ var Room = sequelize.define('room', {
 	description: {
 		type: Sequelize.TEXT,
 		allowNull: true
+	}
+}, {
+	instanceMethods: {
+		toJSON: utils.toJSON
 	}
 });
 

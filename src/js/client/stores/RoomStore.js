@@ -1,19 +1,18 @@
 class RoomStore {
 	constructor() {
-		this.errorMessage = null;
+		this.error = null;
 		this.room = null;
-
-		this.fetched = false; // false if data is not fetched yet
 
 		this.bindActions(this.alt.getActions('RoomActions'))
 	}
 
 	onUpdateRoom(room) {
 		this.room = room;
+		this.error = null;
 	}
 
-	onRoomFailed(errorMessage){
-		this.errorMessage = errorMessage;
+	onRoomFailed(error) {
+		this.error = error;
 	}
 }
 

@@ -5,6 +5,7 @@ import Sequelize from "sequelize";
 
 import Social from "./social"
 import Room from "./room"
+import * as utils from "../utils"
 
 var User = sequelize.define('user', {
 	name: {
@@ -22,6 +23,7 @@ var User = sequelize.define('user', {
 	}
 }, {
 	instanceMethods: {
+		toJSON: utils.toJSON,
 		getUserRooms: function(){
 			let sql = `SELECT room.id, room.title, room.image, room.description, user.id as uid, user.name as uname, user.avatar as uavatar FROM room LEFT JOIN user on user.id = room.user_id WHERE room.deleted_at IS NULL AND (room.user_id = :userid OR room.id IN ( SELECT UserRoom.room_id FROM UserRoom WHERE UserRoom.user_id = :userid ) )`;
 			let opt = { 

@@ -8,14 +8,14 @@ class RoomActions {
 
 	fetchRoom(id) {
 		return (dispatch, alt) => {
-			dispatch();
+			this.updateRoom(null);
 
-			let promise = alt.sources.RoomSource.fetchRoom()
+			let promise = alt.sources.RoomSource.fetch(id)
 				.then((room) => {
 					this.updateRoom(room);
 				})
-				.catch((errorMessage) => {
-					this.roomFailed(errorMessage);
+				.catch((error) => {
+					this.roomFailed("Something wrong occurred");
 				});
 
 			alt.resolver.resolve(promise)

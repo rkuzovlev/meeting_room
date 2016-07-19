@@ -1,3 +1,5 @@
+import * as utils from "../utils"
+
 class RoomSource {
 	constructor (fetcher) {
 		this._fetcher = fetcher
@@ -5,6 +7,7 @@ class RoomSource {
 
 	fetch (id) {
 		return this._fetcher.fetch('/api/room/' + id)
+			.then(utils.checkResponseCode)
 			.then(function(response) {
 				return response.json()
 			})

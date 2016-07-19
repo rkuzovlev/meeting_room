@@ -4,8 +4,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AltContainer from 'alt-container';
 
-import Header from './Header.jsx';
-import Notifications from './Notifications.jsx';
+import HeaderContainer from './HeaderContainer.jsx';
+import NotificationsContainer from './NotificationsContainer.jsx';
 
 
 export default React.createClass({
@@ -13,8 +13,8 @@ export default React.createClass({
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme({}, {userAgent: 'all'})}>
 				<AltContainer>
-					<Notifications {...this.props} />
-					<Header {...this.props} />
+					<NotificationsContainer />
+					<HeaderContainer />
 
 					{this.props.children}
 				</AltContainer>

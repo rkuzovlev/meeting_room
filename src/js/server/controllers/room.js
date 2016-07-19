@@ -1,4 +1,8 @@
 import * as capi  from '../centrifugo/api'
+import sequelize from '../sequelize'
+
+const User = sequelize.models.user;
+const Room = sequelize.models.room;
 
 export let newMessage = function*(){
 	if (!this.req.user){
@@ -18,7 +22,7 @@ export let newMessage = function*(){
 			user: user,
 			message: this.request.body.message
 		};
-		
+
 		yield capi.sendToRoom(parseInt(this.params.roomid), data);
 	} catch (e) {
 		console.error("can't send message to room", e)
@@ -29,5 +33,23 @@ export let newMessage = function*(){
 
 	this.status = 201;
 	this.body = "test";
+}
 
+export let getRoom = function*(){
+	try {
+		var room = yield Room.findOne({where: {id: this.params.roomid}})
+	} catch(e) {
+		console.error(e)
+		this.status = 500;
+		return
+	}
+
+	if (!room) {
+		this.status = 404;
+		this.body = "Room not found";
+		return
+	}
+
+	this.status = 200;
+	this.body = room.toJSON()
 }

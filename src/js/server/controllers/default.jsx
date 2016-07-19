@@ -56,7 +56,7 @@ export function *index(argument) {
 			this.status = 200;
 			this.body = `<!DOCTYPE html>${html}`;
 		} catch (e) {
-			console.error('Was somethig wrong with flux.resolver promises. ', e.message);
+			console.error('Was somethig wrong with flux.resolver promises. ', e);
 			this.throw(500, 'Sorry, service unavailable now, try it later!');
 			return;
 		}

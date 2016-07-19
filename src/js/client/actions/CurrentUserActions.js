@@ -6,20 +6,22 @@ class CurrentUserActions {
 			'userFailed',
 			'userEdit',
 			'userSave',
-			'updateRooms'
+			'clearUser'
 		)
 	}
 
-	fetchRooms() {
+	logout() {
 		return (dispatch, alt) => {
 			dispatch();
 
-			let promise = alt.sources.CurrentUserSource.fetchRooms()
-				.then((rooms) => {
-					this.updateRooms(rooms);
+			let NotificationActions = alt.getActions('NotificationActions')
+
+			let promise = alt.sources.CurrentUserSource.logout()
+				.then(() => {
+					this.clearUser();
 				})
-				.catch((errorMessage) => {
-					this.userFailed(errorMessage);
+				.catch((error) => {
+					NotificationActions.newError("Can't logout");
 				});
 
 			alt.resolver.resolve(promise)
@@ -34,8 +36,8 @@ class CurrentUserActions {
 				.then((user) => {
 					this.updateUser(user);
 				})
-				.catch((errorMessage) => {
-					this.userFailed(errorMessage);
+				.catch((error) => {
+					this.userFailed(error);
 				});
 
 			alt.resolver.resolve(promise)

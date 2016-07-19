@@ -6,8 +6,8 @@ class NotificationActions {
 		)
 	}
 
-	newError(errorMessage) {
-		this.addError(errorMessage);
+	newError(error) {
+		this.addError(error);
 	}
 
 	showed(id) {

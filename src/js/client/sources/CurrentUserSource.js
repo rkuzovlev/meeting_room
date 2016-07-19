@@ -1,5 +1,6 @@
 import isNode from 'detect-node'
 import { getCentrifugo } from './../centrifugo'
+import * as utils from "../utils"
 
 if (!isNode){
 	getCentrifugo().then(function(cent){
@@ -13,8 +14,14 @@ class CurrentUserSource {
 		this._fetcher = fetcher
 	}
 
+	logout () {
+		return this._fetcher.fetch('/api/user/logout')
+			.then(utils.checkResponseCode)
+	}
+
 	fetch (userId) {
 		return this._fetcher.fetch('/api/user/' + userId)
+			.then(utils.checkResponseCode)
 			.then(function(response) {
 				return response.json()
 			})
@@ -22,6 +29,7 @@ class CurrentUserSource {
 
 	fetchCurrent(){
 		return this._fetcher.fetch('/api/user/current')
+			.then(utils.checkResponseCode)
 			.then(function(response) {
 				return response.json()
 			})
@@ -29,6 +37,7 @@ class CurrentUserSource {
 
 	fetchRooms(){
 		return this._fetcher.fetch('/api/user/current/rooms')
+			.then(utils.checkResponseCode)
 			.then(function(response) {
 				return response.json()
 			})
@@ -45,7 +54,7 @@ class CurrentUserSource {
 			body: JSON.stringify(user)
 		};
 
-		return this._fetcher.fetch('/api/user/current', opts)
+		return this._fetcher.fetch('/api/user/current', opts).then(utils.checkResponseCode)
 	}
 };
 

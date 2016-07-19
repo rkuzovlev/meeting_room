@@ -16,6 +16,7 @@ router.get('/user/current/rooms', uc.getCurrentUserRooms);
 
 
 router.post('/room/:roomid/message', rc.newMessage);
+router.get('/room/:roomid', rc.getRoom);
 
 
 router.get('/centrifugo/create_token', cc.createToken);
