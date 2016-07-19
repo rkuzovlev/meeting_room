@@ -6,7 +6,12 @@ class CurrentUserStore {
 	}
 
 	init() {
-		this.user = null;
+		this.user = {
+			avatar : "",
+			email : "",
+			id : null,
+			name : ""
+		};
 
 		this.error = null;
 		this.edit = false;

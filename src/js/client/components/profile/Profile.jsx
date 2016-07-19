@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import AltContainer from 'alt-container';
 
-import RoomListContainer from './RoomListContainer.jsx';
+import RoomList from './RoomList.jsx';
 
 export default React.createClass({
 	editUser() {
@@ -12,14 +12,11 @@ export default React.createClass({
 	},
 
 	saveUser() {
-		let user = this.props.CurrentUserStore.user;
-		this.props.CurrentUserActions.save(user);
+		this.props.CurrentUserActions.save(this.props.CurrentUserStore.user);
 	},
 
 	onChangeName(event) {
-		// let state = this.props.CurrentUserStore;
-		// state.user.name = event.target.value
-		// this.setState(state);
+		this.props.CurrentUserActions.changeName(event.target.value)
 	},
 
 	onNameKeyDown(event) {
@@ -71,12 +68,8 @@ export default React.createClass({
 					{infoBlock}
 				</div>
 
-				<AltContainer>
-					<RoomListContainer />
-				</AltContainer>
+				<RoomList {...this.props} />
 			</section>
 		)
 	}
 })
-
-

@@ -10,6 +10,10 @@ class CurrentUserActions {
 		)
 	}
 
+	changeName(username) {
+		return this.updateUsername(username);
+	}
+
 	logout() {
 		return (dispatch, alt) => {
 			dispatch();
