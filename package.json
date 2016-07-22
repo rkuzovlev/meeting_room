@@ -28,6 +28,7 @@
     "detect-node": "^2.0.3",
     "enumify": "^1.0.4",
     "es6-promise": "^3.2.1",
+    "gelf-pro": "^0.8.0",
     "iso": "^5.2.0",
     "jscent": "^0.1.1",
     "koa": "^1.2.0",
@@ -51,6 +52,7 @@
     "react-router": "^2.4.1",
     "redis": "^2.6.2",
     "sequelize": "^3.23.4",
+    "webrtc-adapter": "^1.4.0",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

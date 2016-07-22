@@ -10,6 +10,7 @@ import routes from './../../client/routes.jsx';
 import Alt from './../../client/alt';
 import Fetcher from './../fetcher';
 import Resolver from './../resolver';
+import Cent from './../cent';
 
 
 const runRouter = function(routes, location){
@@ -36,7 +37,7 @@ export function *index(argument) {
 
 	} else {
 		const fetcher = new Fetcher(this.request)
-		const flux = new Alt(fetcher, new Resolver())
+		const flux = new Alt(fetcher, new Resolver(), new Cent())
 		const iso = new Iso()
 		const elems =  (<AltContainer flux={flux}> 
 							<RouterContext {...props}/> 

@@ -10,19 +10,25 @@ import Fetcher from './fetcher';
 import Resolver from './resolver';
 import routes from './routes.jsx';
 import Alt from './alt';
+import { getCentrifugo } from './centrifugo'
+
+import wrtcadapter from 'webrtc-adapter'
+console.log('wrtcadapter', wrtcadapter);
 
 
 Iso.bootstrap(function (state) {
 	// console.log('Iso.bootstrap', JSON.parse(state));
 	
-	const alt = new Alt(new Fetcher(), new Resolver());
-	alt.bootstrap(state)
+	getCentrifugo().then(function(cent){
+		const alt = new Alt(new Fetcher(), new Resolver(), cent);
+		alt.bootstrap(state)
 
-	ReactDOM.render(
-		<AltContainer flux={alt}>
-			<Router routes={routes} history={browserHistory}/>
-		</AltContainer>,
+		ReactDOM.render(
+			<AltContainer flux={alt}>
+				<Router routes={routes} history={browserHistory}/>
+			</AltContainer>,
 
-		document.getElementById('content')
-	);
+			document.getElementById('content')
+		);
+	});
 });

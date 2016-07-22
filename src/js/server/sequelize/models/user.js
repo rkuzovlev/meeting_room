@@ -32,24 +32,6 @@ var User = sequelize.define('user', {
 			};
 
 			return sequelize.query(sql, opt);
-
-			/*
-			return Room.findAll({where: { user_id: this.id }}).then((rooms) => {
-				return this.getConnectedRooms({attributes: { exclude: ['ConnectedRooms'] }}).then((crooms) => {
-					let ids = [];
-					rooms.forEach((r) =>{
-						ids.push(r.id);
-					})
-
-					crooms.forEach((cr) =>{
-						if(ids.indexOf(cr.id) < 0){
-							rooms.push(cr);
-						}
-					})
-					return rooms;
-				});
-			});
-			*/
 		}
 	},
 

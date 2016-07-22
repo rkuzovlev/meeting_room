@@ -62,6 +62,8 @@ section.room {
 				overflow-x: hidden;
 				width: 100%;
 			    max-width: 100%;
+			    padding-right: 15px;
+				box-sizing: border-box;
 
 				&::-webkit-scrollbar {
 				    width: 8px;
@@ -87,6 +89,7 @@ section.room {
 
 
 				.message {
+				    word-wrap: break-word;
 
 					span.user {
 						font-weight: bold;
@@ -95,6 +98,22 @@ section.room {
 					a {
 						text-decoration: none;
 						color: rgb(0, 188, 212);
+					}
+				}
+
+				.message.system {
+					cursor: default;
+				    text-align: center;
+				    background: #eee;
+				    padding: 10px 0;
+				}
+
+				.message.join,
+				.message.leave {
+					color: #666;
+
+					span {
+						color: #000;
 					}
 				}
 			}

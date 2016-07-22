@@ -1,13 +1,4 @@
-import isNode from 'detect-node'
-import { getCentrifugo } from './../centrifugo'
 import * as utils from "../utils"
-
-if (!isNode){
-	getCentrifugo().then(function(cent){
-		console.log('cent', cent)
-	})
-}
-
 
 class CurrentUserSource {
 	constructor (fetcher) {

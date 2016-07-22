@@ -8,6 +8,7 @@ export default function render(title, body, description){
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/assets/main.css" />
 
+	<script src="/assets/js/kurento-utils.js"></script>
 	<script src="//cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 
 	<title>${title}</title>

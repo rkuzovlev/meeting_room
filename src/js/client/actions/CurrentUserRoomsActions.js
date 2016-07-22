@@ -1,7 +1,8 @@
 class CurrentUserRoomsActions {
 	constructor() {
 		this.generateActions (
-			'updateRooms'
+			'updateRooms',
+			'userFailed'
 		)
 	}
 

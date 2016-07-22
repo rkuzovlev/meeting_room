@@ -4,3 +4,8 @@ export let checkResponseCode = function(response){
 	}
 	return response;
 }
+
+
+export let genUID = function(len = 7){
+	return Math.random().toString(36).substring(len);
+}

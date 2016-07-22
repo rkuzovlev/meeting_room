@@ -32,7 +32,7 @@ export let newMessage = function*(){
 	}
 
 	this.status = 201;
-	this.body = "test";
+	this.body = "ok";
 }
 
 export let getRoom = function*(){

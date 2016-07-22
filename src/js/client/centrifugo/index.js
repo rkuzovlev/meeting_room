@@ -33,9 +33,9 @@ function getCentrifugo(){
 				console.log("user#1", message.data);
 			});
 
-			c.subscribe("room:1", function(message) {
-				console.log("room:1", message.data);
-			});
+			// c.subscribe("room:1", function(message) {
+			// 	console.log("room:1", message.data);
+			// });
 
 			c.connect();
 

@@ -1,14 +1,10 @@
 import React from 'react'
-import TextField from 'material-ui/TextField';
-
-const writeInChatStyle = {
-	bottom: 0
-}
+import Chat from "./Chat.jsx"
 
 
 export default React.createClass({
 	render() {
-		// console.log('this.props', this.props);
+		// console.log('this.props.RoomStore', this.props.RoomStore);
 
 		let room = this.props.RoomStore.room;
 		let roomContent = null
@@ -25,19 +21,7 @@ export default React.createClass({
 						<video></video>
 					</div>
 				</div>
-				<div className="chat">
-					<div className="buttons">
-						
-					</div>
-					<div className="messages">
-						<p className="message">
-							<span className="user">Nixel:</span> Hello guys, try this link please <a target="blank" href="https://github.com/rkuzovlev/meeting_room">https://github.com/rkuzovlev/meeting_room</a>
-						</p>
-					</div>
-					<div className="write">
-						<TextField underlineStyle={ writeInChatStyle } hintText="Write your message" fullWidth={true} /> 
-  					</div>
-				</div>
+				<Chat {...this.props} />
 			</div>
 		} else {
 			roomContent = <div className="loading">

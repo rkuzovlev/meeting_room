@@ -13,6 +13,25 @@ class RoomSource {
 			})
 	}
 
+	sendMessage(roomid, message) {
+		let body = {
+			"message": message
+		};
+
+		let opts = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'same-origin',
+			body: JSON.stringify(body)
+		};
+
+		return this._fetcher.fetch('/api/room/' + roomid + "/message", opts)
+			.then(utils.checkResponseCode);
+	}
+
 	// sendMessage(id, message) {
 		
 	// }

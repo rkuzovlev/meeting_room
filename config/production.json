@@ -9,6 +9,16 @@
 			"db": 6
 		}
 	},
+	"gelf": {
+		"server": "node1",
+		"adapterName": "udp",
+		"adapterOptions": {
+			"protocol": "udp4",
+			"family": 4,
+			"host": "83.246.193.247",
+			"port": 12204
+		}
+	},
 	"database": {
 		"db": "mroom",
 		"user": "mroom",
