@@ -3,7 +3,7 @@ import React from 'react'
 export default React.createClass({
 
 	fbLogin() {
-		window.location = "http://mroomdev.rkuzovlev.com/login/facebook";
+		window.location = "/login/facebook";
 	},
 
 	render() {
