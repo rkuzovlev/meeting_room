@@ -6,7 +6,7 @@
 		}
 	},
 	"centrifugo": {
-		"clienturl": "http://centmroom.rkuzovlev.com/connection",
+		"clienturl": "https://centmroom.rkuzovlev.com/connection",
 		"url": "http://localhost:8000",
 		"secret": "98460e83-ef03-46ff-8b84-00eb00505a3f",
 		"redis": {
