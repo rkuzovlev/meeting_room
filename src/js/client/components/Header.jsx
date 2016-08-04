@@ -12,7 +12,7 @@ export default React.createClass({
 		let user = this.props.CurrentUserStore.user;
 		let getList = null;
 
-		if (user){
+		if (user.id){
 			getList = <ul>
 				<li><Link tabIndex="-1" to="/about"><FlatButton label="About" /></Link></li>
 				<li><Link tabIndex="-1" to="/profile"><FlatButton secondary={true} label={user.name} /></Link></li>

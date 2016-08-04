@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production gulp build",
     "build-dev": "gulp",
     "start": "NODE_ENV=production node src/js/server/app.js",
-    "start-dev": "sudo PORT=80 NODE_ENV=development node src/js/server/app.js"
+    "start-dev": "NODE_ENV=development node src/js/server/app.js"
   },
   "repository": {
     "type": "git",
@@ -51,8 +51,8 @@
     "react-helmet": "^3.1.0",
     "react-router": "^2.4.1",
     "redis": "^2.6.2",
+    "request": "^2.74.0",
     "sequelize": "^3.23.4",
-    "webrtc-adapter": "^1.4.0",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

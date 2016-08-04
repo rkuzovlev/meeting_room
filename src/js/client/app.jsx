@@ -11,10 +11,10 @@ import Resolver from './resolver';
 import routes from './routes.jsx';
 import Alt from './alt';
 import { getCentrifugo } from './centrifugo'
+// import Kurento from './kurento';
 
-import wrtcadapter from 'webrtc-adapter'
-console.log('wrtcadapter', wrtcadapter);
 
+// let kurento = new Kurento(1, true);
 
 Iso.bootstrap(function (state) {
 	// console.log('Iso.bootstrap', JSON.parse(state));

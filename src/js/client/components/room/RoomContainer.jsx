@@ -7,11 +7,13 @@ export default React.createClass({
 	render() {
 		let stores = { 
 			'ChatStore': this.props.flux.getStore('ChatStore'),
+			'CurrentUserStore': this.props.flux.getStore('CurrentUserStore'),
 			'RoomStore': this.props.flux.getStore('RoomStore')
 		};
 
 		let actions = {
 			'ChatActions': this.props.flux.getActions('ChatActions'),
+			'CurrentUserActions': this.props.flux.getActions('CurrentUserActions'),
 			'RoomActions': this.props.flux.getActions('RoomActions')
 		};
 

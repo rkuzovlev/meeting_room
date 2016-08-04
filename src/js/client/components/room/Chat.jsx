@@ -1,5 +1,7 @@
 import React from 'react'
 import TextField from 'material-ui/TextField';
+import { Link } from 'react-router'
+import FlatButton from 'material-ui/FlatButton';
 
 const writeInChatStyle = {
 	bottom: 0
@@ -39,6 +41,17 @@ export default React.createClass({
 
 	render() {
 		// console.log('this.props', this.props);
+		// console.log('this.props.CurrentUserStore', this.props.CurrentUserStore);
+		
+		let center = "";
+
+		let write = null;
+		if (this.props.CurrentUserStore.user.id){
+			write = <TextField underlineStyle={ writeInChatStyle } onKeyDown={this.onMessageKeyDown} hintText="Write your message" fullWidth={true} /> 
+		} else {
+			write = <Link tabIndex="-1" to="/login"><FlatButton secondary={true} label="Login for chat in room" /></Link>
+			center = " center";
+		}
 
 		return (
 			<div className="chat">
@@ -69,8 +82,8 @@ export default React.createClass({
 						return m;
 					})}
 				</div>
-				<div className="write">
-					<TextField underlineStyle={ writeInChatStyle } onKeyDown={this.onMessageKeyDown} hintText="Write your message" fullWidth={true} /> 
+				<div className={"write" + center}>
+					{write}
 				</div>
 			</div>
 		)

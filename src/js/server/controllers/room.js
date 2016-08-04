@@ -1,15 +1,22 @@
 import * as capi  from '../centrifugo/api'
 import sequelize from '../sequelize'
+import * as kurento  from '../kurento'
 
 const User = sequelize.models.user;
 const Room = sequelize.models.room;
 
-export let newMessage = function*(){
-	if (!this.req.user){
-		this.status = 401;
-		this.body = "Unauthorized";
-		return
+export let newStream = function*(){
+	try {
+		yield kurento.newBroadcaster(1, 2, "my offer")
+	} catch (e) {
+		this.throw(500, e.message);
 	}
+
+	this.status = 201;
+}
+
+export let newMessage = function*(){
+	this.assert(this.req.user, 401, 'Unauthorized');
 
 	try {
 		let user = {
@@ -26,9 +33,7 @@ export let newMessage = function*(){
 		yield capi.sendToRoom(parseInt(this.params.roomid), data);
 	} catch (e) {
 		console.error("can't send message to room", e)
-		this.status = 500;
-		this.body = "can't send message to room";
-		return
+		this.throw(500, "can't send message to room");
 	}
 
 	this.status = 201;
@@ -40,8 +45,7 @@ export let getRoom = function*(){
 		var room = yield Room.findOne({where: {id: this.params.roomid}})
 	} catch(e) {
 		console.error(e)
-		this.status = 500;
-		return
+		this.throw(500, "Can't get room");
 	}
 
 	if (!room) {

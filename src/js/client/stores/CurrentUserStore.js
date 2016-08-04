@@ -5,14 +5,17 @@ class CurrentUserStore {
 		this.bindActions(this.alt.getActions('CurrentUserActions'))
 	}
 
-	init() {
+	initUser() {
 		this.user = {
 			avatar : "",
 			email : "",
 			id : null,
 			name : ""
 		};
+	}
 
+	init() {
+		this.initUser();
 		this.error = null;
 		this.edit = false;
 
@@ -39,7 +42,7 @@ class CurrentUserStore {
 
 	onUserFailed(error) {
 		this.error = error;
-		this.user = null;
+		this.initUser();
 	}
 
 	onClearUser() {

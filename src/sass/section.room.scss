@@ -120,6 +120,10 @@ section.room {
 
 			.write {
 				flex-basis: 48px;
+
+				&.center {
+					text-align: center;
+				}
 			}
 		}
 	}

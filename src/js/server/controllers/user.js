@@ -13,32 +13,25 @@ export let getUser = function*(){
 
 
 export let getCurrentUserRooms = function*(){
-	if (this.req.user){
-		this.status = 200;
-		
-		try {
-			var rooms = yield this.req.user.getUserRooms();
-		} catch (e) {
-			console.log(e);
-			this.throw(500, 'Something wrong');
-		}
-
-		this.body = rooms;
-	} else {
-		this.status = 401;
-		this.body = 'Unauthorized';
+	this.assert(this.req.user, 401, 'Unauthorized');
+	
+	try {
+		var rooms = yield this.req.user.getUserRooms();
+	} catch (e) {
+		console.error(e);
+		this.throw(500, "Can't get curent rooms");
 	}
+
+	this.status = 200;
+	this.body = rooms;
 }
 
 
 export let getCurrentUser = function*(){
-	if (this.req.user){
-		this.status = 200;
-		this.body = this.req.user.toJSON();
-	} else {
-		this.status = 401;
-		this.body = 'Unauthorized';
-	}
+	this.assert(this.req.user, 401, 'Unauthorized');
+	
+	this.status = 200;
+	this.body = this.req.user.toJSON();
 }
 
 
@@ -47,18 +40,15 @@ export let putCurrentUser = function*(){
 		return
 	}
 
-	if (this.req.user){
-		this.status = 200;
-		try {
-			yield User.updateUser(this.req.user.get('id'), this.request.body);
-		} catch (e){
-			console.error("Can't update user", e);
+	this.assert(this.req.user, 401, 'Unauthorized');
 
-			this.status = 404;
-			this.body = 'Something wrong!';
-		}
-	} else {
-		this.status = 401;
-		this.body = 'Unauthorized';
+	this.status = 200;
+	
+	try {
+		yield User.updateUser(this.req.user.get('id'), this.request.body);
+	} catch (e){
+		console.error("Can't update user", e);
+
+		this.throw(500, "Can't update user");
 	}
 }

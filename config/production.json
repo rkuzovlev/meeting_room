@@ -1,6 +1,12 @@
 {
+	"kurento": {
+		"service": {
+			"host": "127.0.0.1",
+			"port": 3010
+		}
+	},
 	"centrifugo": {
-		"clienturl": "http://centrifugo_mroom.rkuzovlev.com/connection",
+		"clienturl": "http://centmroom.rkuzovlev.com/connection",
 		"url": "http://localhost:8000",
 		"secret": "98460e83-ef03-46ff-8b84-00eb00505a3f",
 		"redis": {

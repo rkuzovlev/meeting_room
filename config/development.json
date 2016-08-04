@@ -1,4 +1,10 @@
 {
+	"kurento": {
+		"service": {
+			"host": "127.0.0.1",
+			"port": 3010
+		}
+	},
 	"centrifugo": {
 		"clienturl": "http://centrifugo_mroomdev.rkuzovlev.com:8000/connection",
 		"url": "http://localhost:8000",
