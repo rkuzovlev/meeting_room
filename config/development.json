@@ -6,7 +6,7 @@
 		}
 	},
 	"centrifugo": {
-		"clienturl": "http://centrifugo_mroomdev.rkuzovlev.com:8000/connection",
+		"clienturl": "https://centmroomdev.rkuzovlev.com/connection",
 		"url": "http://localhost:8000",
 		"secret": "4e02110a-f4b7-43f3-a43e-a2cc8d640368",
 		"redis": {
@@ -57,7 +57,7 @@
 	}, 
 	"passport": {
 		"server": {
-			"host": "http://mroomdev.rkuzovlev.com"
+			"host": "https://mroomdev.rkuzovlev.com"
 		},
 		"facebook": {
 			"clientID": "1114039515301285",

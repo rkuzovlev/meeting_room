@@ -15,7 +15,8 @@ router.put('/user/current', uc.putCurrentUser);
 router.get('/user/current/rooms', uc.getCurrentUserRooms);
 
 
-router.post('/room/:roomid/stream/create', rc.newStream);
+router.post('/room/:roomid/stream/message', rc.streamMessage);
+router.get('/room/:roomid/stream/permissions', rc.streamPermissions);
 router.post('/room/:roomid/message', rc.newMessage);
 router.get('/room/:roomid', rc.getRoom);
 

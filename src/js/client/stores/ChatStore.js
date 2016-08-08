@@ -54,7 +54,7 @@ class ChatStore {
 			time: (new Date()).getTime()
 		};
 
-		console.log('onSystemMessage', type, message, msg);
+		// console.log('onSystemMessage', type, message, msg);
 		this.messages.push(msg);
 	}
 }

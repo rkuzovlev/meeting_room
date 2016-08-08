@@ -11,17 +11,15 @@ import Resolver from './resolver';
 import routes from './routes.jsx';
 import Alt from './alt';
 import { getCentrifugo } from './centrifugo'
-// import Kurento from './kurento';
+import Kurento from './kurento';
 
-
-// let kurento = new Kurento(1, true);
 
 Iso.bootstrap(function (state) {
-	// console.log('Iso.bootstrap', JSON.parse(state));
-	
 	getCentrifugo().then(function(cent){
-		const alt = new Alt(new Fetcher(), new Resolver(), cent);
+		const alt = new Alt(new Fetcher(), new Resolver(), cent, new Kurento());
 		alt.bootstrap(state)
+	
+		window.flux = alt;
 
 		ReactDOM.render(
 			<AltContainer flux={alt}>

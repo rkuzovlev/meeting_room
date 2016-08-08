@@ -18,6 +18,8 @@ export default React.createClass({
 		};
 
 		actions.RoomActions.fetchRoom(this.props.params.roomID);
+		actions.RoomActions.checkPermissions(this.props.params.roomID);
+		actions.RoomActions.loadRoom(this.props.params.roomID);
 	    actions.ChatActions.clearChat();
 	    // actions.ChatActions.connectChat(this.props.params.roomID);
 

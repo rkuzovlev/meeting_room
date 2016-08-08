@@ -28,7 +28,7 @@ class ChatActions {
 			if (this.subscription){
 				this.subscription.history()
 					.then((messages) => {
-						console.log('history', messages);
+						// console.log('history', messages);
 						messages.data.reverse().forEach((m) => {
 							this._centMessage(m);
 						})
@@ -98,19 +98,19 @@ class ChatActions {
 
 	_onJoin (message) {
 		// See below description of join message format
-		console.log('join', message);
+		// console.log('join', message);
 		return this.systemMessage('join', message.data.default_info.name)
 	}
 
 	_onLeave (message) {
 		// See below description of leave message format
-		console.log('leave', message);
+		// console.log('leave', message);
 		return this.systemMessage('leave', message.data.default_info.name)
 	}
 
 	_onError (errContext) {
 		// See below description of subscribe error callback context format
-		console.log('connectChat error', errContext);
+		console.error('connectChat error', errContext);
 	}
 }
 

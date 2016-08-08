@@ -58,7 +58,7 @@
 	},
 	"passport": {
 		"server": {
-			"host": "http://mroom.rkuzovlev.com"
+			"host": "https://mroom.rkuzovlev.com"
 		},
 		"facebook": {
 			"clientID": "1114039515301285",

@@ -32,6 +32,23 @@ class RoomSource {
 			.then(utils.checkResponseCode);
 	}
 
+	checkPermissions(roomID){
+		let opts = {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			credentials: 'same-origin'
+		};
+
+		return this._fetcher.fetch("/api/room/" + roomID + "/stream/permissions", opts)
+			.then(utils.checkResponseCode)
+			.then(function(response){
+				return response.json();
+			});
+	}
+
 	// sendMessage(id, message) {
 		
 	// }

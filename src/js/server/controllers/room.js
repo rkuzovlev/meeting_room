@@ -5,14 +5,23 @@ import * as kurento  from '../kurento'
 const User = sequelize.models.user;
 const Room = sequelize.models.room;
 
-export let newStream = function*(){
-	try {
-		yield kurento.newBroadcaster(1, 2, "my offer")
-	} catch (e) {
-		this.throw(500, e.message);
-	}
+export let streamMessage = function*(){
+	this.status = 200;
 
-	this.status = 201;
+	try {
+		yield kurento.message(this.req.user, this.params.roomid, this.request.body);
+	} catch (e){
+		console.error(e);
+		this.status = 500;
+	}
+}
+
+export let streamPermissions = function*(){
+	this.status = 200;
+	this.body = {
+		"stream": true,
+		"manage": false
+	}
 }
 
 export let newMessage = function*(){

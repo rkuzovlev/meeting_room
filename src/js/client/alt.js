@@ -16,11 +16,12 @@ import CurrentUserSource from './sources/CurrentUserSource'
 import RoomSource from './sources/RoomSource'
 
 class Flux extends Alt {
-	constructor(fetcher, resolver, centrifugo) {
+	constructor(fetcher, resolver, centrifugo, kurento) {
 		super();
 		
 		this.resolver = resolver
 		this.centrifugo = centrifugo;
+		this.kurento = kurento;
 
 		this.sources = {
 			"CurrentUserSource": new CurrentUserSource(fetcher),

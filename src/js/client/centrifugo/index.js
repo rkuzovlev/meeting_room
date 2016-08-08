@@ -13,7 +13,7 @@ function getCentrifugo(){
 
 	return fetch('/api/centrifugo/create_token', { credentials: 'same-origin' })
 		.then(function(response){
-			console.log('response', response)
+			// console.log('response', response)
 			return response.json()
 		})
 		.then(function(json){
@@ -40,7 +40,7 @@ function getCentrifugo(){
 			c.connect();
 
 			c.on('connect', function(context){
-				console.log('connect event', context);
+				// console.log('connect event', context);
 			});
 
 			cent = c;
