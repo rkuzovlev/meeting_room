@@ -5,12 +5,10 @@ import "whatwg-fetch"
 var cent = null;
 
 function getCentrifugo(){
-	if (cent) {
-		return new Promise(function(resolve){
-			resolve(cent);
-		});
-	}
+	return cent;
+}
 
+function loadCentrifugo(){
 	return fetch('/api/centrifugo/create_token', { credentials: 'same-origin' })
 		.then(function(response){
 			// console.log('response', response)
@@ -49,4 +47,4 @@ function getCentrifugo(){
 		})
 }
 
-export { getCentrifugo }
+export { getCentrifugo, loadCentrifugo }

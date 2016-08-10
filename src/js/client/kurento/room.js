@@ -18,7 +18,8 @@ class Room {
 	}
 
 	destroy(){
-		this.stopStream()
+		this.localStream.destroy();
+		this.messenger.destroy()
 	}
 }
 

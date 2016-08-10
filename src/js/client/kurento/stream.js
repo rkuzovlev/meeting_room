@@ -26,6 +26,11 @@ class Stream {
 
 		console.error('Еррор сука блеать', error)
 	}
+
+	destroy(){
+		this.messenger.destroy();
+		this.messenger = null;
+	}
 }
 
 export default Stream

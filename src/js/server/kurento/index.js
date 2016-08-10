@@ -10,7 +10,7 @@ export let message = function(user, roomid, message){
 		if (user){
 			j = user.toJSON();
 		}
-		console.log(j, roomid, message);
+		// console.log(roomid, message);
 
 		switch (message.type) {
 			case "startStream": 
@@ -32,7 +32,7 @@ export let message = function(user, roomid, message){
 					return;
 				}
 
-				if (typeof message.candidate != "string"){
+				if (!message.candidate){
 					reject(new Error('candidate is wrong "' + message.sdpOffer + '"'));
 					return;
 				}

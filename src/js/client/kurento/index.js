@@ -8,8 +8,6 @@ class Kurento {
 	}
 
 	loadRoom(roomID){
-		console.log('loadRoom', roomID);
-
 		if(!this.room || this.room.roomID != roomID){
 			this.destroy();
 			this.room = new Room(roomID);

@@ -10,15 +10,14 @@ import Fetcher from './fetcher';
 import Resolver from './resolver';
 import routes from './routes.jsx';
 import Alt from './alt';
-import { getCentrifugo } from './centrifugo'
+import { loadCentrifugo, getCentrifugo } from './centrifugo'
 import Kurento from './kurento';
 
-
 Iso.bootstrap(function (state) {
-	getCentrifugo().then(function(cent){
+	var start = function(cent){
 		const alt = new Alt(new Fetcher(), new Resolver(), cent, new Kurento());
 		alt.bootstrap(state)
-	
+
 		window.flux = alt;
 
 		ReactDOM.render(
@@ -28,5 +27,7 @@ Iso.bootstrap(function (state) {
 
 			document.getElementById('content')
 		);
-	});
+	};
+
+	loadCentrifugo().then(getCentrifugo).then(start);
 });

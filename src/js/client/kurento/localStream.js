@@ -1,26 +1,5 @@
 import Stream from './stream'
 
-const stunServers = [
-	{"urls":"stun:stun.l.google.com:19302"},
-	{"urls":"stun:stun1.l.google.com:19302"},
-	{"urls":"stun:stun2.l.google.com:19302"},
-	{"urls":"stun:stun3.l.google.com:19302"},
-	{"urls":"stun:stun4.l.google.com:19302"},
-	{"urls":"stun:stun01.sipphone.com"},
-	{"urls":"stun:stun.ekiga.net"},
-	{"urls":"stun:stun.fwdnet.net"},
-	{"urls":"stun:stun.ideasip.com"},
-	{"urls":"stun:stun.iptel.org"},
-	{"urls":"stun:stun.rixtelecom.se"},
-	{"urls":"stun:stun.schlund.de"},
-	{"urls":"stun:stun.softjoys.com"},
-	{"urls":"stun:stun.voiparound.com"},
-	{"urls":"stun:stun.voipbuster.com"},
-	{"urls":"stun:stun.voipstunt.com"},
-	{"urls":"stun:stun.voxgratia.org"},
-	{"urls":"stun:stun.xten.com"}
-];
-
 class LocalStream extends Stream {
 	constructor(messenger, roomID){
 		super(messenger);
@@ -29,7 +8,13 @@ class LocalStream extends Stream {
 		this.stream = null;
 	}
 
+	onSdpAnswer(sdpAnswer){
+		this.stream.processAnswer(sdpAnswer.sdpAnswer);
+	}
+
 	start(){
+		this.messenger.on('sdpAnswer', this.onSdpAnswer, this);
+
 		let options = {
 			mediaConstraints: {
 				audio: true,
@@ -39,40 +24,35 @@ class LocalStream extends Stream {
 				}
 			},
 			onicecandidate : this.onIceCandidate.bind(this),
-			// configuration: {
-			// 	iceServers: stunServers
-			// }
+			onnegotiationneeded: this.onNegotiationNeeded.bind(this)
 		};
 
-		this.stream = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, (error) =>  {
+		let self = this;
+
+		this.stream = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, function(error) {
 			if(error){
-				this.onError(error);
+				self.onError(error);
 			}
+
+			this.generateOffer((error, sdpOffer) => {
+				self.onOfferPresenter(error, sdpOffer, 'startStream');
+			});
 		});
+	}
 
-		this.stream.generateOffer((error, sdpOffer) => {
-			this.onOfferPresenter(error, sdpOffer, 'startStream');
-		});
+	onNegotiationNeeded(){
+		let ls = this.stream.getLocalStream();
+		let url = URL.createObjectURL(ls);
 
-		setTimeout(function(){
-			let ls = this.stream.getLocalStream();
-			let url = URL.createObjectURL(ls);
-	
-			let v = {
-				id: ls.id,
-				src: url
-			};
+		let v = {
+			id: ls.id,
+			src: url
+		};
 
-			// console.log('getLocalStream', ls);
-			// console.log('localStream video', v);
-
-			flux.getActions('RoomActions').changeLocalVideo(v)
-		}.bind(this), 1000)
+		flux.getActions('RoomActions').changeLocalVideo(v)
 	}
 
 	onIceCandidate(candidate) {
-		console.log('Local candidate' + JSON.stringify(candidate));
-
 		var message = {
 			type : 'onIceCandidate',
 			candidate : candidate
@@ -86,7 +66,15 @@ class LocalStream extends Stream {
 	stop(){
 		this.stream.dispose();
 		this.stream = null;
+
+		this.messenger.off('sdpAnswer', this.onSdpAnswer);
+
 		flux.getActions('RoomActions').changeLocalVideo(null);
+	}
+
+	destroy(){
+		this.stop();
+		super.destroy();
 	}
 }
 
